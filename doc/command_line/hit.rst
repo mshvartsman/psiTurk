@@ -24,8 +24,7 @@ upon your current mode. ``hit create`` can also be run interactively by
 entering the command without parameters.
 
 The ``duration`` specifies how long a worker can "hold on" to your HIT
-for (in hours). This should be long enough for workers to actually
-complete your HIT, but sometimes workers will "accept" a HIT which is
+for (in hours or hours:minutes). This should be long enough for workers to actually complete your HIT, but sometimes workers will "accept" a HIT which is
 worth a lot of money but come back and do the work later in the
 day. You can specify a shorter duration if you want workers to
 complete your HIT immediately.
@@ -34,7 +33,7 @@ Example
 ~~~~~~~~
 
 Creating a HIT in the sandbox with three assignments that pays $2.00 and has a
-1 hour time limit::
+1 hour time limit:
 
    [psiTurk server:on mode:sdbx #HITs:0]$ hit create 3 2.00 1
    *****************************
@@ -42,7 +41,23 @@ Creating a HIT in the sandbox with three assignments that pays $2.00 and has a
        HITid:  2XE40SPW1INMXUF9OJUNDB6BT8W2F4
        Max workers: 3
        Reward: $2.00
-       Duration: 1 hours
+       Duration: 01h00m
+       Fee: $0.60
+       ________________________
+       Total: $6.60
+     Ad for this HIT now hosted at: https://ad.psiturk.org/view/Q3HWnfqzg3MP9VDbu3kFyn?assignmentId=debugJCI80S&hitId=debug9AWC90
+   [psiTurk server:on mode:sdbx #HITs:1]$
+
+Creating a HIT in the sandbox with three assignments that pays $2.00 and has a
+30 minute time limit:
+
+   [psiTurk server:on mode:sdbx #HITs:0]$ hit create 3 2.00 0:30
+   *****************************
+     Creating sandbox HIT
+       HITid:  2XE40SPW1INMXUF9OJUNDB6BT8W2F4
+       Max workers: 3
+       Reward: $2.00
+       Duration: 00h30m
        Fee: $0.60
        ________________________
        Total: $6.60
