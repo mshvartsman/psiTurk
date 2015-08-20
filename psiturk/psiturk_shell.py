@@ -894,7 +894,7 @@ class PsiturkNetworkShell(PsiturkShell):
             print '*** reward must have format [dollars].[cents]'
             return
         if interactive:
-            duration = raw_input('duration of hit (in hh:mm)? ')
+            duration = raw_input('duration of hit (in [h] or [h:m])? ')
         try:
             duration = time.strptime(duration, "%H:%M")
         except ValueError:
