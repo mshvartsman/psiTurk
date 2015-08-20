@@ -898,8 +898,11 @@ class PsiturkNetworkShell(PsiturkShell):
         try:
             duration = time.strptime(duration, "%H:%M")
         except ValueError:
-            print '*** duration must have format hh:mm'
-            return
+            try: 
+                duration = time.strptime(duration, "%H")
+            except ValueError: 
+                print '*** duration must have format [h] or [h:m]'
+                return
         if duration[3] <= 0 and duration[4] <= 0:
             print '*** duration must be at least 1 minute'
             return
