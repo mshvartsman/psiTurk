@@ -1005,7 +1005,7 @@ class PsiturkNetworkShell(PsiturkShell):
                              '    HITid: %s' % str(hit_id),
                              '    Max workers: %s' % numWorkers,
                              '    Reward: $%s' %reward,
-                             '    Duration: %sh:%sm' % (duration[3], duration[4]),
+                             '    Duration: %02dh%02dm' % (duration[3], duration[4]),
                              '    Fee: $%.2f' % fee,
                              '    ________________________',
                              '    Total: $%.2f' % total])
