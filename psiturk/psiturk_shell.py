@@ -894,14 +894,14 @@ class PsiturkNetworkShell(PsiturkShell):
             print '*** reward must have format [dollars].[cents]'
             return
         if interactive:
-            duration = raw_input('duration of hit (in hours)? ')
+            duration = raw_input('duration of hit (in hh:mm)? ')
         try:
-            int(duration)
+            duration = time.strptime(duration, "%H:%M")
         except ValueError:
-            print '*** duration must be a whole number'
+            print '*** duration must have format hh:mm'
             return
-        if int(duration) <= 0:
-            print '*** duration must be greater than 0'
+        if duration[3] <= 0 and duration[4] <= 0:
+            print '*** duration must be at least 1 minute'
             return
 
         # register with the ad server (psiturk.org/ad/register) using POST
@@ -966,7 +966,7 @@ class PsiturkNetworkShell(PsiturkShell):
                 "description": self.config.get('HIT Configuration', 'description'),
                 "keywords": self.config.get('HIT Configuration', 'amt_keywords'),
                 "reward": reward,
-                "duration": datetime.timedelta(hours=int(duration))
+                "duration": datetime.timedelta(hours=duration[3], minutes=duration[4])
             }
             hit_id = self.amt_services.create_hit(hit_config)
             if hit_id is not False:
@@ -1005,7 +1005,7 @@ class PsiturkNetworkShell(PsiturkShell):
                              '    HITid: %s' % str(hit_id),
                              '    Max workers: %s' % numWorkers,
                              '    Reward: $%s' %reward,
-                             '    Duration: %s hours' % duration,
+                             '    Duration: %sh:%sm' % (duration[3], duration[4]),
                              '    Fee: $%.2f' % fee,
                              '    ________________________',
                              '    Total: $%.2f' % total])
